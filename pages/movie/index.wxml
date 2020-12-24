@@ -1,0 +1,68 @@
+<!--index.wxml-->
+<!-- 头部 -->
+<view class="header">
+  <navigator hover-class="none" class="loaction">{{locate}}</navigator>
+  <view class="tabs">
+    <text bindtap="switch" data-val="hots" data-hots-status="{{hotsStatus}}" class="{{tabIndex === 'hots' ? 'active' : ''}}">热映</text>
+    <text bindtap="switch" data-val="coming" data-coming-status="{{comingStatus}}" class="{{tabIndex === 'coming' ? 'active' : ''}}">待映</text>
+  </view>
+  <navigator class="search"></navigator>
+</view>
+
+<!-- 电影列表（热映） -->
+<view class="items" hidden="{{tabIndex === 'coming'}}">
+  <navigator hover-class="none" wx:for="{{hots.items}}" wx:key="key">
+    <view class="item">
+      <!-- 电影封面 -->
+      <image src="{{item.img}}" alt="" />
+      <!-- 电影信息 -->
+      <view class="info">
+        <text class="name">{{item.nm}}</text>
+        <text calss="type">{{item.cat}}</text>
+        <text class="actor">{{item.desc}}</text>
+        <text class="count">{{item.showInfo}}</text>
+      </view>
+      <!-- 其他 -->
+      <view class="extra">
+        <text class="btn buy">购票</text>
+      </view>
+    </view>
+  </navigator>
+</view>
+<!-- 电影列表（待映） -->
+<view class="wrap"  hidden="{{tabIndex === 'hots'}}">
+  <text class="title">近期最受期待</text>
+  <!-- 近期期待 -->
+  <scroll-view scroll-x>
+    <view class="cell" wx:for="{{v1.items}}">
+      <image src="{{item.img}}" alt="" />
+      <text class="name">{{item.nm}}</text>
+      <text class="wish">{{item.wish}}人想看</text>
+      <text class="date">{{item.comingTitle}}</text>
+    </view>
+  </scroll-view>
+  <!-- 待映 -->
+  <view class="items">
+    <block wx:for="{{v2.items}}">
+      <text class="title">{{item.comingTitle}}</text>
+      <navigator hover-class="none">
+        <view class="item">
+          <!-- 电影封面 -->
+          <image src="https://mrgaotest.oss-cn-beijing.aliyuncs.com/images/%E7%94%B5%E5%BD%B1.jpg" alt="" />
+          <!-- 电影信息 -->
+          <view class="info">
+            <text class="name">动物世界</text>
+            <text calss="type">动作，动画，喜剧</text>
+            <text class="actor">演员：小明，李易峰，李易峰，李易峰,李易峰，李易峰</text>
+            <text class="count">今天205家影院放映280场</text>
+          </view>
+          <!-- 其他 -->
+          <view class="extra">
+            <text class="btn buy">购票</text>
+          </view>
+        </view>
+      </navigator>
+    </block>
+
+  </view>
+</view>
